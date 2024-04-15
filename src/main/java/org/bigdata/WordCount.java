@@ -1,6 +1,7 @@
-package org.example;
+package org.bigdata;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import org.apache.hadoop.conf.Configuration;
@@ -20,6 +21,8 @@ public class WordCount {
 
         private final static IntWritable one = new IntWritable(1);
         private Text word = new Text();
+
+        private HashMap<Text, IntWritable> results = new HashMap<>();
 
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
@@ -48,7 +51,6 @@ public class WordCount {
     }
 
     public static void main(String[] args) throws Exception {
-
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf, "word count");
         job.setJarByClass(WordCount.class);
