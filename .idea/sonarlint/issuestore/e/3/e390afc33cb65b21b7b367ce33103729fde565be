@@ -1,0 +1,9 @@
+
+°
+java:S1319""hThe type of "comments" should be an interface such as "List" rather than the implementation "ArrayList".(ßØ˜ôøÿÿÿÿ8þ€ýÿë1J$c68bd191-09ed-4bc0-94aa-d6f777febdc7
+{
+java:S2755Q"3Disable access to external entities in XML parsing.(ƒ¶ŠÊûÿÿÿÿ8÷êúÿë1J$7c8a296b-5d9f-426c-8c79-8fe23b82bf29
+}
+java:S1118":Add a private constructor to hide the implicit public one.(¿Öì¤8ˆ­þÿë1J$1625684f-7542-4948-95e2-db1cb81333ef
+x
+java:S6035X"0Replace this alternation with a character class.(‹öØ‚üÿÿÿÿ8ýêúÿë1J$8ac31c58-3105-45be-9f8d-17d449c1ac57

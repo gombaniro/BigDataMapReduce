@@ -1,0 +1,16 @@
+
+	java:S112,"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òιόÿÿÿÿ8―½€μ1J$a9f192c9-1bc1-457d-8036-f3cd7f508a2d
+	java:S112."FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òιόÿÿÿÿ8‰―½€μ1J$a2092b18-8935-45ec-9f06-9a3a96164ab5
+	java:S112R"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òιόÿÿÿÿ8‰―½€μ1J$1f43a26b-f29c-4c06-b8e9-758548a7a2d4
+	java:S112T"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òιόÿÿÿÿ8‰―½€μ1J$85cd992a-6b0f-494a-87c0-80ba1dab0c86
+	java:S112V"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òιόÿÿÿÿ8‰―½€μ1J$790005d5-2830-4648-8b46-90bebf611172
+‚
+java:S1118":Add a private constructor to hide the implicit public one.(’ΆΜ¤ώÿÿÿÿ8―½€μ1J$f6ce433a-e058-4e0f-b1cd-e05f14eac925
+‡
+java:S2147-"DCombine this catch with the one at line 43, which has the same body.(Γ‡²φ8‘―½€μ1J$19de92f6-04bc-4af7-995f-cb057bcb9223
+
+java:S14506"WRemove the "question" field and declare it as a local variable in the relevant methods.(΅•³ϋÿÿÿÿ8’―½€μ1J$beb09695-b50e-4602-8b1c-5cf26af68ded
+‡
+java:S2147S"DCombine this catch with the one at line 81, which has the same body.(Γ‡²φ8”―½€μ1J$b1c576f1-a2b2-4edf-81de-197282b00106
+
+java:S2147U"DCombine this catch with the one at line 83, which has the same body.(―ώΌ ωÿÿÿÿ8”―½€μ1J$074daf7d-0e90-4de9-9b1c-c79b0078321c

@@ -2,6 +2,7 @@ package org.bigdata;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.apache.hadoop.conf.Configuration;
@@ -19,17 +20,24 @@ public class WordCount {
     public static class TokenizerMapper
             extends Mapper<Object, Text, Text, IntWritable>{
 
-        private final static IntWritable one = new IntWritable(1);
-        private Text word = new Text();
-
         private HashMap<Text, IntWritable> results = new HashMap<>();
 
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
             StringTokenizer itr = new StringTokenizer(value.toString());
-            while (itr.hasMoreTokens()) {
+             while (itr.hasMoreTokens()) {
+                 IntWritable one = new IntWritable(1);
+                 Text word = new Text();
                 word.set(itr.nextToken());
-                context.write(word, one);
+                results.put(word, one);
+            }
+        }
+
+        @Override
+        protected void cleanup(Mapper<Object, Text, Text, IntWritable>.Context context) throws IOException, InterruptedException {
+
+            for(Map.Entry<Text, IntWritable> entry: results.entrySet()) {
+                context.write(entry.getKey(), entry.getValue());
             }
         }
     }
@@ -55,7 +63,7 @@ public class WordCount {
         Job job = Job.getInstance(conf, "word count");
         job.setJarByClass(WordCount.class);
         job.setMapperClass(TokenizerMapper.class);
-        job.setCombinerClass(IntSumReducer.class);
+//        job.setCombinerClass(IntSumReducer.class);
         job.setReducerClass(IntSumReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
