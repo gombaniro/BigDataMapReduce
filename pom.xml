@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>Pair-Crystal-Ball-mapred</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <artifactId>Stripe-Crystal-Ball-mapred</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

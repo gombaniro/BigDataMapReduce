@@ -5,6 +5,7 @@ import org.apache.hadoop.io.WritableComparable;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.Objects;
 
 public class PairTuple implements WritableComparable<PairTuple> {
     String value1;
@@ -58,5 +59,10 @@ public class PairTuple implements WritableComparable<PairTuple> {
             return c;
         }
         return this.value2.compareTo(o.value2);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value1, value2);
     }
 }

@@ -164,3 +164,5 @@ e
 5src/main/java/org/bigdata/common/PairPartitioner.java,b/7/b70508305219a822104377c63b17e641f8ed5477
 d
 4src/main/java/org/bigdata/common/PairComparator.java,d/f/df07cfa6e467ac3addfc7cb59d2e369c43ea16ae
+`
+0src/main/java/org/bigdata/StripeCrystalBall.java,b/8/b840bc856ebe50f1b0ce83872c06d20b6533363a
