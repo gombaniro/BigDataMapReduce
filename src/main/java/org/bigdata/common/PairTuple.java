@@ -1,16 +1,21 @@
 package org.bigdata.common;
 
-import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.io.WritableComparable;
 
-import java.io.*;
+import java.io.DataInput;
+import java.io.DataOutput;
+import java.io.IOException;
 
-public class PairTuple implements Writable, Comparable<PairTuple>  {
+public class PairTuple implements WritableComparable<PairTuple> {
     String value1;
     String value2;
 
     public PairTuple(String value1, String value2) {
         this.value1 = value1;
         this.value2 = value2;
+    }
+
+    public PairTuple() {
     }
 
     @Override
@@ -28,8 +33,22 @@ public class PairTuple implements Writable, Comparable<PairTuple>  {
     public String getValue1() {
         return value1;
     }
+
+    public void setValue1(String value1) {
+        this.value1 = value1;
+    }
+
     public String getValue2() {
         return value2;
+    }
+
+    public void setValue2(String value2) {
+        this.value2 = value2;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s\t%s\t", value1, value2);
     }
 
     @Override
@@ -40,25 +59,4 @@ public class PairTuple implements Writable, Comparable<PairTuple>  {
         }
         return this.value2.compareTo(o.value2);
     }
-
-//    public static void main(String[] args) throws IOException {
-//        // Writing PairTuple to DataOutput
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        DataOutput dataOutput = new DataOutputStream(baos);
-//        PairTuple tupleToWrite = new PairTuple("hello", "world");
-//        tupleToWrite.write(dataOutput);
-//
-//        // Reading PairTuple from DataInput
-//        byte[] bytes = baos.toByteArray();
-//        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-//        DataInput dataInput = new DataInputStream(bais);
-//        PairTuple tupleToRead = new PairTuple("", "");
-//        tupleToRead.readFields(dataInput);
-//
-//        // Displaying the values read from PairTuple
-//        System.out.println("Value 1: " + tupleToRead.getValue1());
-//       System.out.println("Value 2: " + tupleToRead.getValue2());
-//    }
-
-
 }
