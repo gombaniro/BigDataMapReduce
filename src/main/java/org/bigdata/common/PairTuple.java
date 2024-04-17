@@ -65,4 +65,12 @@ public class PairTuple implements WritableComparable<PairTuple> {
     public int hashCode() {
         return Objects.hash(value1, value2);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        PairTuple other = (PairTuple) obj;
+        return Objects.equals(value1, other.value1) && Objects.equals(value2, other.value2);
+    }
 }
