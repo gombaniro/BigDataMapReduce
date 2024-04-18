@@ -1,6 +1,7 @@
 package org.bigdata.common;
 
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LogParser {
     private static final String LOG_ENTRY_PATTERN =

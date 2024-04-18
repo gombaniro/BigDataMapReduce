@@ -1,13 +1,13 @@
 package org.bigdata.common;
 
 public class LogEntry {
-    private String ipAddress;
-    private String dateTime;
-    private String method;
-    private String uri;
-    private String protocol;
-    private int status;
-    private long bytesSent;
+    private final String ipAddress;
+    private final String dateTime;
+    private final String method;
+    private final String uri;
+    private final String protocol;
+    private final int status;
+    private final long bytesSent;
 
     private LogEntry(Builder builder) {
         this.ipAddress = builder.ipAddress;
@@ -20,6 +20,14 @@ public class LogEntry {
     }
 
     // Getters for fields (omitted for brevity)
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public long getBytesSent() {
+        return bytesSent;
+    }
 
     public static class Builder {
         private String ipAddress;
@@ -68,14 +76,6 @@ public class LogEntry {
         public LogEntry build() {
             return new LogEntry(this);
         }
-    }
-
-    public String getIpAddress() {
-        return ipAddress;
-    }
-
-    public long getBytesSent() {
-        return bytesSent;
     }
 }
 

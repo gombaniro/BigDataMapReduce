@@ -3,8 +3,8 @@ package org.bigdata.common;
 import java.util.List;
 
 public class ProductPair {
-    private String key;
-    private List<String> products;
+    private final String key;
+    private final List<String> products;
 
     public ProductPair(String key, List<String> products) {
         this.key = key;

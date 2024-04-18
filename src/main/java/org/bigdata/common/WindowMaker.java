@@ -5,13 +5,13 @@ import java.util.List;
 
 public class WindowMaker {
 
-    public static List<ProductPair> make(List<String> purchases ) {
+    public static List<ProductPair> make(List<String> purchases) {
         List<ProductPair> pairs = new ArrayList<>();
 
         for (int i = 0; i < purchases.size(); i++) {
             String key = purchases.get(i);
             List<String> products = new ArrayList<>();
-            for (int j = i + 1; j < purchases.size() ; j++) {
+            for (int j = i + 1; j < purchases.size(); j++) {
                 if (purchases.get(j).equals(key)) {
                     break;
                 }

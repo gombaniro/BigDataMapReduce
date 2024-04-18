@@ -1,6 +1,7 @@
 package org.bigdata.common;
 
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class IPAddressValidator {
     private static final String IPV4_PATTERN =
