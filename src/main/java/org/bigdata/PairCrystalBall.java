@@ -58,10 +58,15 @@ public class PairCrystalBall {
 
     public static class PairCrystalBallReducer extends Reducer<PairTuple, LongWritable, PairTuple, DoubleWritable> {
         private LongWritable total = new LongWritable(0);
+        private String currentFirst = null;
 
         @Override
         protected void reduce(PairTuple key, Iterable<LongWritable> values,
                               Reducer<PairTuple, LongWritable, PairTuple, DoubleWritable>.Context context) throws IOException, InterruptedException {
+            if (currentFirst == null || !currentFirst.equals(key.getValue1())) {
+                total.set(0);
+                currentFirst = key.getValue1();
+            }
 
             String value2 = key.getValue2();
             if (value2.equals("*")) {
@@ -73,7 +78,7 @@ public class PairCrystalBall {
                 for (LongWritable val : values) {
                     count += val.get();
                 }
-                context.write(key, new DoubleWritable( (double) count / total.get()));
+                context.write(key, new DoubleWritable( (double) count / (double) total.get()));
             }
         }
     }
