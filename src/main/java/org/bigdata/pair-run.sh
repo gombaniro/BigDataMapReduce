@@ -13,10 +13,10 @@ hadoop jar  Big-data-mapred-1.0-SNAPSHOT.jar org.bigdata.PairCrystalBall $INPUT_
 # Check the exit status of the Hadoop job
 # shellcheck disable=SC2181
 if [ $? -eq 0 ]; then
-  echo "Job completed successfully."
+  echo "Job (Pair Crystal  Ball) completed successfully."
   echo "The results files are saved :"
   hdfs dfs -ls "$OUTPUT_DIR"
 else
-  echo "Job failed."
+  echo "Job (Pair Crystal  Ball) failed."
 fi
 

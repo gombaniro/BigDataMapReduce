@@ -1,0 +1,163 @@
+Pair Approach
+**************
+File System Counters
+                FILE: Number of bytes read=197849818
+                FILE: Number of bytes written=398864665
+                FILE: Number of read operations=0
+                FILE: Number of large read operations=0
+                FILE: Number of write operations=0
+                HDFS: Number of bytes read=1240591
+                HDFS: Number of bytes written=8919769
+                HDFS: Number of read operations=35
+                HDFS: Number of large read operations=0
+                HDFS: Number of write operations=3
+                HDFS: Number of bytes read erasure-coded=0
+        Job Counters
+                Killed map tasks=1
+                Launched map tasks=10
+                Launched reduce tasks=1
+                Data-local map tasks=10
+                Total time spent by all maps in occupied slots (ms)=491546723
+                Total time spent by all reduces in occupied slots (ms)=113056500
+                Total time spent by all map tasks (ms)=149999
+                Total time spent by all reduce tasks (ms)=34500
+                Total vcore-milliseconds taken by all map tasks=149999
+                Total vcore-milliseconds taken by all reduce tasks=34500
+                Total megabyte-milliseconds taken by all map tasks=491546723
+                Total megabyte-milliseconds taken by all reduce tasks=113056500
+        Map-Reduce Framework
+                Map input records=10000
+                Map output records=10413148
+                Map output bytes=177023516
+                Map output materialized bytes=197849872
+                Input split bytes=1321
+                Combine input records=0
+                Combine output records=0
+                Reduce input groups=291600
+                Reduce shuffle bytes=197849872
+                Reduce input records=10413148
+                Reduce output records=291060
+                Spilled Records=20826296
+                Shuffled Maps =10
+                Failed Shuffles=0
+                Merged Map outputs=10
+                GC time elapsed (ms)=2787
+                CPU time spent (ms)=128250
+                Physical memory (bytes) snapshot=8165355520
+                Virtual memory (bytes) snapshot=51936509952
+                Total committed heap usage (bytes)=6779043840
+                Peak Map Physical memory (bytes)=936308736
+                Peak Map Virtual memory (bytes)=4730273792
+                Peak Reduce Physical memory (bytes)=562081792
+                Peak Reduce Virtual memory (bytes)=4727160832
+        Shuffle Errors
+                BAD_ID=0
+                CONNECTION=0
+                IO_ERROR=0
+                WRONG_LENGTH=0
+                WRONG_MAP=0
+                WRONG_REDUCE=0
+        File Input Format Counters
+                Bytes Read=1239270
+        File Output Format Counters
+                Bytes Written=8919769
+
+Stripe Approach
+****************
+
+       File System Counters
+                FILE: Number of bytes read=126376101
+                FILE: Number of bytes written=255915207
+                FILE: Number of read operations=0
+                FILE: Number of large read operations=0
+                FILE: Number of write operations=0
+                HDFS: Number of bytes read=1240591
+                HDFS: Number of bytes written=8919769
+                HDFS: Number of read operations=35
+                HDFS: Number of large read operations=0
+                HDFS: Number of write operations=3
+                HDFS: Number of bytes read erasure-coded=0
+        Job Counters
+                Launched map tasks=10
+                Launched reduce tasks=1
+                Data-local map tasks=10
+                Total time spent by all maps in occupied slots (ms)=288104009
+                Total time spent by all reduces in occupied slots (ms)=61302839
+                Total time spent by all map tasks (ms)=87917
+                Total time spent by all reduce tasks (ms)=18707
+                Total vcore-milliseconds taken by all map tasks=87917
+                Total vcore-milliseconds taken by all reduce tasks=18707
+                Total megabyte-milliseconds taken by all map tasks=288104009
+                Total megabyte-milliseconds taken by all reduce tasks=61302839
+        Map-Reduce Framework
+                Map input records=10000
+                Map output records=309820
+                Map output bytes=125273176
+                Map output materialized bytes=126376155
+                Input split bytes=1321
+                Combine input records=0
+                Combine output records=0
+                Reduce input groups=540
+                Reduce shuffle bytes=126376155
+                Reduce input records=309820
+                Reduce output records=291060
+                Spilled Records=619640
+                Shuffled Maps =10
+                Failed Shuffles=0
+                Merged Map outputs=10
+                GC time elapsed (ms)=1056
+                CPU time spent (ms)=49470
+                Physical memory (bytes) snapshot=7132962816
+                Virtual memory (bytes) snapshot=51973726208
+                Total committed heap usage (bytes)=5943328768
+                Peak Map Physical memory (bytes)=711991296
+                Peak Map Virtual memory (bytes)=4727525376
+                Peak Reduce Physical memory (bytes)=570933248
+                Peak Reduce Virtual memory (bytes)=4733050880
+        Shuffle Errors
+                BAD_ID=0
+                CONNECTION=0
+                IO_ERROR=0
+                WRONG_LENGTH=0
+                WRONG_MAP=0
+                WRONG_REDUCE=0
+        File Input Format Counters
+                Bytes Read=1239270
+        File Output Format Counters
+                Bytes Written=8919769
+
+   Data Comparison
+
+   Pair Approach:
+   Map input records: 10,000
+   Map output records: 10,413,148
+   Map output bytes: 177,023,516
+   Reduce input groups: 291,600
+   Reduce input records: 10,413,148
+   Reduce output records: 291,060
+   Total time spent by all map tasks: 149,999 ms
+   Total time spent by all reduce tasks: 34,500 ms
+   Spilled Records: 20,826,296
+   Shuffled Maps: 10
+   Failed Shuffles: 0
+   Stripe Approach:
+   Map input records: 10,000
+   Map output records: 309,820
+   Map output bytes: 125,273,176
+   Reduce input groups: 540
+   Reduce input records: 309,820
+   Reduce output records: 291,060
+   Total time spent by all map tasks: 87,917 ms
+   Total time spent by all reduce tasks: 18,707 ms
+   Spilled Records: 619,640
+   Shuffled Maps: 10
+   Failed Shuffles: 0
+
+
+   Comparison conclusion:
+   Map Output Records: Pair Approach generated significantly more map output records compared to the Stripe Approach.
+   Reduce Input Groups: Pair Approach had a higher number of distinct reduce input groups compared to the Stripe Approach.
+   Total Time Spent: Both approaches had similar total time spent by all map tasks and reduce tasks, with the Stripe Approach being slightly faster.
+   Spilled Records: Pair Approach had a larger number of spilled records compared to the Stripe Approach, indicating more data had to be written to disk during the shuffle phase.
+   Map Output Bytes: Pair Approach had a larger amount of map output bytes compared to the Stripe Approach.
+   Overall, the Stripe Approach seems to have performed more efficiently in terms of map and reduce tasks, with fewer spilled records and a faster total processing time.
