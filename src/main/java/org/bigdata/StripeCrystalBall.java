@@ -34,7 +34,7 @@ public class StripeCrystalBall {
         job.setReducerClass(StripeCrystalBallReducer.class);
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(MapWritable.class);
-        job.setOutputKeyClass(PairTuple.class);
+        job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(DoubleWritable.class);
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
@@ -57,17 +57,24 @@ public class StripeCrystalBall {
                 MapWritable results = new MapWritable();
                 for (String product : pair.getProducts()) {
                     PairTuple tuple = new PairTuple(pair.getKey(), product);
-                    results.put(tuple, new DoubleWritable(1.0));
+                    if (results.containsKey(tuple)) {
+                        DoubleWritable oldVal = (DoubleWritable) results.get(tuple);
+                        oldVal.set(oldVal.get() + 1.0);
+                        results.put(tuple, oldVal);
+                    } else {
+                        results.put(tuple, new DoubleWritable(1.0));
+                    }
+
                 }
                 context.write(new Text(pair.getKey()), results);
             }
         }
     }
 
-    public static class StripeCrystalBallReducer extends Reducer<Text, MapWritable, PairTuple, DoubleWritable> {
+    public static class StripeCrystalBallReducer extends Reducer<Text, MapWritable, Text, DoubleWritable> {
         @Override
         protected void reduce(Text key, Iterable<MapWritable> values,
-                              Reducer<Text, MapWritable, PairTuple, DoubleWritable>.Context context) throws IOException, InterruptedException {
+                              Reducer<Text, MapWritable, Text, DoubleWritable>.Context context) throws IOException, InterruptedException {
             MapWritable finalResults = new MapWritable();
 
             DoubleWritable total = new DoubleWritable(0.0);
@@ -90,7 +97,8 @@ public class StripeCrystalBall {
             for (Map.Entry<Writable, Writable> entry : finalResults.entrySet()) {
                 PairTuple outPutKey = (PairTuple) entry.getKey();
                 DoubleWritable val = (DoubleWritable) entry.getValue();
-                context.write(outPutKey, new DoubleWritable(val.get() / total.get()));
+                context.write(new Text(outPutKey  + String.format("(count: %f, total: %f)", val.get(), total.get())),
+                        new DoubleWritable(val.get() / total.get()));
             }
         }
     }

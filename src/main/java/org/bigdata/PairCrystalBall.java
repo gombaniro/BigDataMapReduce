@@ -29,7 +29,7 @@ public class PairCrystalBall {
         job.setPartitionerClass(PairPartitioner.class);
         job.setMapOutputKeyClass(PairTuple.class);
         job.setMapOutputValueClass(LongWritable.class);
-        job.setOutputKeyClass(PairTuple.class);
+        job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(DoubleWritable.class);
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
@@ -56,13 +56,13 @@ public class PairCrystalBall {
         }
     }
 
-    public static class PairCrystalBallReducer extends Reducer<PairTuple, LongWritable, PairTuple, DoubleWritable> {
+    public static class PairCrystalBallReducer extends Reducer<PairTuple, LongWritable, Text, DoubleWritable> {
         private LongWritable total = new LongWritable(0);
         private String currentFirst = null;
 
         @Override
         protected void reduce(PairTuple key, Iterable<LongWritable> values,
-                              Reducer<PairTuple, LongWritable, PairTuple, DoubleWritable>.Context context) throws IOException, InterruptedException {
+                              Reducer<PairTuple, LongWritable, Text, DoubleWritable>.Context context) throws IOException, InterruptedException {
             if (currentFirst == null || !currentFirst.equals(key.getValue1())) {
                 total.set(0);
                 currentFirst = key.getValue1();
@@ -78,7 +78,8 @@ public class PairCrystalBall {
                 for (LongWritable val : values) {
                     count += val.get();
                 }
-                context.write(key, new DoubleWritable( (double) count / (double) total.get()));
+                context.write(new Text(key + String.format("(count: %d, total: %d)", count, total.get())),
+                        new DoubleWritable( (double) count / (double) total.get()));
             }
         }
     }
