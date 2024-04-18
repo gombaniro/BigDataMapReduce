@@ -3,6 +3,7 @@ package org.bigdata;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.DoubleWritable;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -26,7 +27,8 @@ public class PairCrystalBall {
         job.setMapperClass(PairCrystalBallMapper.class);
         job.setReducerClass(PairCrystalBallReducer.class);
         job.setPartitionerClass(PairPartitioner.class);
-//        job.setSortComparatorClass(PairComparator.class);
+        job.setMapOutputKeyClass(PairTuple.class);
+        job.setMapOutputValueClass(LongWritable.class);
         job.setOutputKeyClass(PairTuple.class);
         job.setOutputValueClass(DoubleWritable.class);
         FileInputFormat.addInputPath(job, new Path(args[0]));
@@ -34,10 +36,10 @@ public class PairCrystalBall {
         System.exit(job.waitForCompletion(true) ? 0 : 1);
     }
 
-    public static class PairCrystalBallMapper extends Mapper<Object, Text, PairTuple, DoubleWritable> {
+    public static class PairCrystalBallMapper extends Mapper<Object, Text, PairTuple, LongWritable> {
         @Override
         protected void map(Object key, Text value,
-                           Mapper<Object, Text, PairTuple, DoubleWritable>.Context context) throws IOException, InterruptedException {
+                           Mapper<Object, Text, PairTuple, LongWritable>.Context context) throws IOException, InterruptedException {
             List<String> products = Arrays.stream(value.toString()
                             .split(" "))
                     .map(s -> s.trim())
@@ -47,34 +49,31 @@ public class PairCrystalBall {
             List<ProductPair> pairs = WindowMaker.make(products);
             for (ProductPair pair : pairs) {
                 for (String product : pair.getProducts()) {
-                    context.write(new PairTuple(pair.getKey(), product), new DoubleWritable(1.0));
-                    context.write(new PairTuple(pair.getKey(), "*"), new DoubleWritable(1.0));
+                    context.write(new PairTuple(pair.getKey(), product), new LongWritable(1));
+                    context.write(new PairTuple(pair.getKey(), "*"), new LongWritable(1));
                 }
             }
         }
     }
 
-    public static class PairCrystalBallReducer extends Reducer<PairTuple, DoubleWritable, PairTuple, DoubleWritable> {
-                                                           //PairTuple, IntWritable, PairTuple, DoubleWritable
-        private DoubleWritable total = new DoubleWritable(0.0);
+    public static class PairCrystalBallReducer extends Reducer<PairTuple, LongWritable, PairTuple, DoubleWritable> {
+        private LongWritable total = new LongWritable(0);
 
         @Override
-        protected void reduce(PairTuple key, Iterable<DoubleWritable> values,
-                              Reducer<PairTuple, DoubleWritable, PairTuple, DoubleWritable>.Context context) throws IOException, InterruptedException {
+        protected void reduce(PairTuple key, Iterable<LongWritable> values,
+                              Reducer<PairTuple, LongWritable, PairTuple, DoubleWritable>.Context context) throws IOException, InterruptedException {
 
             String value2 = key.getValue2();
             if (value2.equals("*")) {
-                for (DoubleWritable val : values) {
+                for (LongWritable val : values) {
                      total.set(total.get() + val.get());
                 }
             } else {
-                double count = 0;
-                for (DoubleWritable val : values) {
+                long count = 0;
+                for (LongWritable val : values) {
                     count += val.get();
                 }
-//                context.write(key, new DoubleWritable( count ));
-//                context.write(key, new DoubleWritable(  total.get()));
-                context.write(key, new DoubleWritable( count / total.get()));
+                context.write(key, new DoubleWritable( (double) count / total.get()));
             }
         }
     }
