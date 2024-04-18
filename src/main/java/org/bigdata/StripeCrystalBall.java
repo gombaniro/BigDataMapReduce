@@ -97,7 +97,7 @@ public class StripeCrystalBall {
             for (Map.Entry<Writable, Writable> entry : finalResults.entrySet()) {
                 PairTuple outPutKey = (PairTuple) entry.getKey();
                 DoubleWritable val = (DoubleWritable) entry.getValue();
-                context.write(new Text(outPutKey  + String.format("(count: %f, total: %f)", val.get(), total.get())),
+                context.write(new Text(outPutKey.toString()),
                         new DoubleWritable(val.get() / total.get()));
             }
         }

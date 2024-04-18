@@ -78,7 +78,7 @@ public class PairCrystalBall {
                 for (LongWritable val : values) {
                     count += val.get();
                 }
-                context.write(new Text(key + String.format("(count: %d, total: %d)", count, total.get())),
+                context.write(new Text(key.toString()),
                         new DoubleWritable( (double) count / (double) total.get()));
             }
         }
