@@ -16,8 +16,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-// hdfs dfs -rmdir /user/crystalball/output
-// hadoop jar Big-data-mapred-1.0-SNAPSHOT.jar org.bigdata.PairCrystalBall /user/crystalball/input /user/crystalball/output
+
 public class PairCrystalBall {
 
     public static void main(String[] args) throws Exception {
@@ -42,7 +41,7 @@ public class PairCrystalBall {
                            Mapper<Object, Text, PairTuple, LongWritable>.Context context) throws IOException, InterruptedException {
             List<String> products = Arrays.stream(value.toString()
                             .split(" "))
-                    .map(s -> s.trim())
+                    .map(String::trim)
                     .filter(s -> !s.isBlank())
                     .collect(Collectors.toList());
 

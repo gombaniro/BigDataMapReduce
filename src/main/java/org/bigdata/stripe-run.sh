@@ -8,13 +8,14 @@ INPUT_DIR="/user/crystalball/input"
 OUTPUT_DIR="/user/crystalball/output/stripe_$CURRENT_DATE_TIME"
 
 # Run the Hadoop job
-hadoop jar  Big-data-mapred-1.0-SNAPSHOT.jar org.bigdata.StripeCrystalBall $INPUT_DIR $OUTPUT_DIR
+hadoop jar  Big-data-mapred-1.0-SNAPSHOT.jar org.bigdata.StripeCrystalBall $INPUT_DIR "$OUTPUT_DIR"
 
 # Check the exit status of the Hadoop job
+# shellcheck disable=SC2181
 if [ $? -eq 0 ]; then
   echo "Job completed successfully."
   echo "The results files are saved :"
-  hdfs dfs -ls $OUTPUT_DIR
+  hdfs dfs -ls "$OUTPUT_DIR"
 else
   echo "Job failed."
 fi

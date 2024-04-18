@@ -22,8 +22,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-// hdfs dfs -rmdir /user/crystalball/output
-// hadoop jar Big-data-mapred.jar org.bigdata.StripeCrystalBall /user/crystalball/input /user/crystalball/output
 public class StripeCrystalBall {
 
     public static void main(String[] args) throws Exception {
@@ -48,7 +46,7 @@ public class StripeCrystalBall {
         protected void map(Object key, Text value, Mapper<Object, Text, Text, MapWritable>.Context context) throws IOException, InterruptedException {
             List<String> products = Arrays.stream(value.toString()
                             .split(" "))
-                    .map(s -> s.trim())
+                    .map(String::trim)
                     .filter(s -> !s.isBlank())
                     .collect(Collectors.toList());
 
