@@ -170,3 +170,9 @@ U
 %src/main/java/org/bigdata/pair-run.sh,a/c/ac151425d2df37b0badbddc6ad339bea550186d2
 W
 'src/main/java/org/bigdata/stripe-run.sh,6/7/67e81ce3bda74bc49e1f7bbfdecae968b831c545
+`
+0src/main/java/org/bigdata/WordCountInMapper.java,c/a/ca7b99eca63fb4c91502165d0aea583c12228da8
+X
+(src/main/java/org/bigdata/average-run.sh,9/e/9e40a8218f5159628631bd2b2098220a872cff59
+b
+2src/main/java/org/bigdata/average-in-mapper-run.sh,d/5/d50e22a8fc7da2dd3f7ef9d0b0366818c68c7e30
