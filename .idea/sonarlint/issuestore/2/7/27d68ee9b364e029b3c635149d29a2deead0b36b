@@ -1,6 +1,0 @@
-
-
-java:S1124"EReorder the modifiers to comply with the Java Language Specification.(——ë ùÿÿÿÿ8½é´ë1J$85aa6bd5-c14e-4aab-90e2-73c837e58abc
-‹
-java:S5361%"HReplace this call to "replaceAll()" by a call to the "replace()" method.(šØê8Àé´ë1J$c2b79e4e-1243-4003-b89c-a35e678117c6
-l	java:S106F"+Replace this use of System.err by a logger.(Î°z8Èé´ë1J$e86e0f1d-efd3-4744-a796-5cabb90f2a4d
