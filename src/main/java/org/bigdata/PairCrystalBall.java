@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 // hdfs dfs -rmdir /user/crystalball/output
-// hadoop jar Pair-Crystal-Ball-mapred-1.0-SNAPSHOT.jar org.bigdata.PairCrystalBall /user/crystalball/input /user/crystalball/output
+// hadoop jar Big-data-mapred-1.0-SNAPSHOT.jar org.bigdata.PairCrystalBall /user/crystalball/input /user/crystalball/output
 public class PairCrystalBall {
 
     public static void main(String[] args) throws Exception {

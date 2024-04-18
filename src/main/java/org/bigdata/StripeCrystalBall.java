@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 
 // hdfs dfs -rmdir /user/crystalball/output
-// hadoop jar Stripe-Crystal-Ball-mapred-1.0-SNAPSHOT.jar org.bigdata.StripeCrystalBall /user/crystalball/input /user/crystalball/output
+// hadoop jar Big-data-mapred.jar org.bigdata.StripeCrystalBall /user/crystalball/input /user/crystalball/output
 public class StripeCrystalBall {
 
     public static void main(String[] args) throws Exception {
