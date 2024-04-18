@@ -34,7 +34,7 @@ public class StripeCrystalBall {
         job.setReducerClass(StripeCrystalBallReducer.class);
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(MapWritable.class);
-        job.setOutputKeyClass(Text.class);
+        job.setOutputKeyClass(PairTuple.class);
         job.setOutputValueClass(DoubleWritable.class);
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
@@ -64,10 +64,10 @@ public class StripeCrystalBall {
         }
     }
 
-    public static class StripeCrystalBallReducer extends Reducer<Text, MapWritable, Text, DoubleWritable> {
+    public static class StripeCrystalBallReducer extends Reducer<Text, MapWritable, PairTuple, DoubleWritable> {
         @Override
         protected void reduce(Text key, Iterable<MapWritable> values,
-                              Reducer<Text, MapWritable, Text, DoubleWritable>.Context context) throws IOException, InterruptedException {
+                              Reducer<Text, MapWritable, PairTuple, DoubleWritable>.Context context) throws IOException, InterruptedException {
             MapWritable finalResults = new MapWritable();
 
             DoubleWritable total = new DoubleWritable(0.0);
@@ -88,9 +88,9 @@ public class StripeCrystalBall {
                 } // end of element wise addition
             }
             for (Map.Entry<Writable, Writable> entry : finalResults.entrySet()) {
-                PairTuple k = (PairTuple) entry.getKey();
+                PairTuple outPutKey = (PairTuple) entry.getKey();
                 DoubleWritable val = (DoubleWritable) entry.getValue();
-                context.write(new Text(k.toString()), new DoubleWritable(val.get() / total.get()));
+                context.write(outPutKey, new DoubleWritable(val.get() / total.get()));
             }
         }
     }
