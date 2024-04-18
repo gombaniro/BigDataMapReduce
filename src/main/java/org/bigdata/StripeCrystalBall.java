@@ -65,7 +65,6 @@ public class StripeCrystalBall {
     }
 
     public static class StripeCrystalBallReducer extends Reducer<Text, MapWritable, Text, DoubleWritable> {
-                                                     //         <Text, MapWritable, Text, DoubleWritable>
         @Override
         protected void reduce(Text key, Iterable<MapWritable> values,
                               Reducer<Text, MapWritable, Text, DoubleWritable>.Context context) throws IOException, InterruptedException {
@@ -88,7 +87,6 @@ public class StripeCrystalBall {
                     }
                 } // end of element wise addition
             }
-//            context.write(new Text(key.toString()), finalResults);
             for (Map.Entry<Writable, Writable> entry : finalResults.entrySet()) {
                 PairTuple k = (PairTuple) entry.getKey();
                 DoubleWritable val = (DoubleWritable) entry.getValue();
