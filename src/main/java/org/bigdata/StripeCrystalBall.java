@@ -47,7 +47,7 @@ public class StripeCrystalBall {
             List<String> products = Arrays.stream(value.toString()
                             .split(" "))
                     .map(String::trim)
-                    .filter(s -> !s.isBlank())
+                    .filter(s -> !s.trim().isEmpty())
                     .collect(Collectors.toList());
 
             List<ProductPair> pairs = WindowMaker.make(products);
