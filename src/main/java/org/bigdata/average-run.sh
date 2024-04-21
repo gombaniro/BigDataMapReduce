@@ -4,18 +4,18 @@
 CURRENT_DATE_TIME=$(date +'%Y-%m-%d_%H-%M-%S')
 
 # Specify input and output directories with current date and time
-INPUT_DIR="/user/crystalball/input"
-OUTPUT_DIR="/user/crystalball/output/stripe_$CURRENT_DATE_TIME"
+INPUT_DIR="/user/input/access_log"
+OUTPUT_DIR="/user/output/access_per_ip_$CURRENT_DATE_TIME"
 
 # Run the Hadoop job
-hadoop jar  Big-data-mapred-1.0-SNAPSHOT.jar org.bigdata.StripeCrystalBall $INPUT_DIR "$OUTPUT_DIR"
+hadoop jar  Big-data-mapred-1.0-SNAPSHOT.jar org.bigdata.AverageComputation $INPUT_DIR "$OUTPUT_DIR"
 
 # Check the exit status of the Hadoop job
 # shellcheck disable=SC2181
 if [ $? -eq 0 ]; then
-  echo "Job (Stripe Crystal  Ball) completed successfully."
+  echo "Job (Average computation) completed successfully."
   echo "The results files are saved :"
   hdfs dfs -ls "$OUTPUT_DIR"
 else
-  echo "Job (Stripe Crystal  Ball) failed."
+  echo "Job (Average computation)failed."
 fi

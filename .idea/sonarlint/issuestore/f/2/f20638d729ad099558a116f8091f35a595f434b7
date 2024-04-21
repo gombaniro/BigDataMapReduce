@@ -1,8 +1,0 @@
-
-	java:S112i"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8–®Öÿë1J$ec37c686-45d1-4466-8d3d-92edf91fa289
-­
-java:S3252 "eUse static access with "org.apache.hadoop.mapreduce.lib.output.FileOutputFormat" for "setOutputPath".(ÊÎ·Ùøÿÿÿÿ8­®Öÿë1J$1edb90a5-e6c8-4cdf-abda-d1aef239a244
-›
-java:S1450O"SRemove the "post" field and declare it as a local variable in the relevant methods.(¾¡ıÿÿÿÿ8±®Öÿë1J$c189224e-8111-45d3-9f9a-e780a02eeac6
-j
-java:S1068M"'Remove this unused "dbf" private field.(†Ñ»ã8û­úÿë1J$361f8240-a22d-4333-9ca6-302303dda94b
