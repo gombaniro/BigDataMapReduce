@@ -22,7 +22,6 @@ public class WordCountInMapper {
         Job job = Job.getInstance(conf, "word count");
         job.setJarByClass(WordCountInMapper.class);
         job.setMapperClass(TokenizerMapper.class);
-//        job.setCombinerClass(IntSumReducer.class);
         job.setReducerClass(IntSumReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
@@ -41,10 +40,16 @@ public class WordCountInMapper {
         ) throws IOException, InterruptedException {
             StringTokenizer itr = new StringTokenizer(value.toString());
             while (itr.hasMoreTokens()) {
-                IntWritable one = new IntWritable(1);
-                Text word = new Text();
-                word.set(itr.nextToken());
-                results.put(word, one);
+
+                Text word = new Text(itr.nextToken());
+                if(results.containsKey(word)) {
+                    int val = results.get(word).get();
+                    val++;
+                    results.put(word, new IntWritable(val));
+                } else {
+                    results.put(word, new IntWritable(1));
+                }
+
             }
         }
 
